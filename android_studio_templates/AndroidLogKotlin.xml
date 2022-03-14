@@ -1,0 +1,6 @@
+<templateSet group="AndroidLogKotlin">
+  <template name="logi" value="android.util.Log.i(&quot;ft:debug&quot;, &quot;$METHOD_NAME$&quot;)" description="Log.i(TAG, String)" toReformat="true" toShortenFQNames="true">
+    <variable name="METHOD_NAME" expression="kotlinFunctionName()" defaultValue="" alwaysStopAt="false" />
+    <context />
+  </template>
+</templateSet>

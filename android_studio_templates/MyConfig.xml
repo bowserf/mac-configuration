@@ -1,0 +1,86 @@
+<templateSet group="Frederic">
+  <template name="constraintlayout" value=" @JvmOverloads constructor(&#10;        context: Context,&#10;        attrs: AttributeSet? = null,&#10;        defStyleAttr: Int = 0&#10;) : ConstraintLayout(context, attrs, defStyleAttr)" description="" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="KOTLIN_TOPLEVEL" value="true" />
+    </context>
+  </template>
+  <template name="framelayout" value=" @JvmOverloads constructor(&#10;        context: Context,&#10;        attrs: AttributeSet? = null,&#10;        defStyleAttr: Int = 0&#10;) : FrameLayout(context, attrs, defStyleAttr)" description="" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="KOTLIN_TOPLEVEL" value="true" />
+    </context>
+  </template>
+  <template name="consthor" value="app:layout_constraintEnd_toEndOf=&quot;parent&quot;&#10;app:layout_constraintStart_toStartOf=&quot;parent&quot;" description="" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="XML_ATTRIBUTE" value="true" />
+    </context>
+  </template>
+  <template name="constver" value="app:layout_constraintBottom_toBottomOf=&quot;parent&quot;&#10;app:layout_constraintTop_toTopOf=&quot;parent&quot;" description="" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="XML_ATTRIBUTE" value="true" />
+    </context>
+  </template>
+  <template name="constall" value="app:layout_constraintBottom_toBottomOf=&quot;parent&quot;&#10;app:layout_constraintEnd_toEndOf=&quot;parent&quot;&#10;app:layout_constraintStart_toStartOf=&quot;parent&quot;&#10;app:layout_constraintTop_toTopOf=&quot;parent&quot;" description="" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="XML_ATTRIBUTE" value="true" />
+    </context>
+  </template>
+  <template name="consttopend" value="app:layout_constraintEnd_toEndOf=&quot;parent&quot;&#10;app:layout_constraintTop_toTopOf=&quot;parent&quot;" description="" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="XML_ATTRIBUTE" value="true" />
+    </context>
+  </template>
+  <template name="contract" value="interface $name$Contract {&#10;&#10;    interface Presenter {&#10;        fun attachScreen(screen: Screen)&#10;        fun detachScreen(screen: Screen)&#10;    }&#10;&#10;    interface Screen&#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="KOTLIN_TOPLEVEL" value="true" />
+    </context>
+  </template>
+  <template name="presenter" value="class $name$Presenter : $name$Contract.Presenter {&#10;&#10;    private var screen: $name$Contract.Screen? = null&#10;&#10;    override fun attachScreen(screen: $name$Contract.Screen) {&#10;        if (this.screen != null) {&#10;            throw IllegalStateException(&quot;Cannot attach a screen while a screen is already attached.&quot;)&#10;        }&#10;        this.screen = screen&#10;    }&#10;&#10;    override fun detachScreen(screen: $name$Contract.Screen) {&#10;        if (this.screen != screen) {&#10;            throw IllegalStateException(&quot;Cannot detach a screen that is not attached.&quot;)&#10;        }&#10;        this.screen = null&#10;    }&#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="KOTLIN_TOPLEVEL" value="true" />
+    </context>
+  </template>
+  <template name="addlist" value="fun addListener(listener: Listener)&#10;&#10;fun removeListener(listener: Listener)&#10;&#10;interface Listener {&#10;    $cursor$&#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="cursor" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="KOTLIN_CLASS" value="true" />
+    </context>
+  </template>
+  <template name="addlistimpl" value="private val listeners = mutableListOf&lt;$cursor$.Listener&gt;()&#10;&#10;override fun addListener(listener: $cursor$.Listener) {&#10;    if (listeners.contains(listener)) {&#10;        return&#10;    }&#10;    listeners.add(listener)&#10;}&#10;&#10;override fun removeListener(listener: $cursor$.Listener) {&#10;    listeners.remove(listener)&#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="cursor" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="KOTLIN_CLASS" value="true" />
+    </context>
+  </template>
+  <template name="listener" value="private val $name$Listener = create$name$()&#10;&#10;private fun create$name$() = object : $listener$ {&#10;&#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="listener" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="KOTLIN_CLASS" value="true" />
+    </context>
+  </template>
+  <template name="screenv" value="    private val screen = createScreen()&#10;    private val presenter = createPresenter()&#10;&#10;    override fun onAttachedToWindow() {&#10;        super.onAttachedToWindow()&#10;        presenter.attachScreen(screen)&#10;    }&#10;&#10;    override fun onDetachedFromWindow() {&#10;        presenter.detachScreen(screen)&#10;        super.onDetachedFromWindow()&#10;    }&#10;&#10;    private fun createScreen() = object : AuthorizeAccessContract.Screen {&#10;&#10;    }&#10;&#10;    private fun createPresenter(): $name$Contract.Presenter {&#10;        if (isInEditMode) {&#10;            return object : $name$Contract.Presenter {&#10;                override fun attachScreen(screen: $name$Contract.Screen) {}&#10;                override fun detachScreen(screen: $name$Contract.Screen) {}&#10;            }&#10;        }&#10;        return $name$Presenter()&#10;    }" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="KOTLIN_CLASS" value="true" />
+    </context>
+  </template>
+  <template name="screen" value="    private val screen = createScreen()&#10;    private val presenter = createPresenter()&#10;&#10;    override fun onStart() {&#10;        super.onStart()&#10;        presenter.attachScreen(screen)&#10;    }&#10;&#10;    override fun onStop() {&#10;        presenter.detachScreen(screen)&#10;        super.onStop()&#10;    }&#10;&#10;    private fun createScreen() = object : $name$Contract.Screen {&#10;&#10;    }&#10;&#10;    private fun createPresenter(): $name$Contract.Presenter {&#10;        return $name$Presenter()&#10;    }" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="KOTLIN_CLASS" value="true" />
+    </context>
+  </template>
+  <template name="noth" value="// nothing to do" description="Write nothing to do commentary" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="KOTLIN" value="true" />
+    </context>
+  </template>
+  <template name="gwt" value="// Given&#10;&#10;// When&#10;&#10;// Then" description="[UnitTest] Given When Then" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="KOTLIN_STATEMENT" value="true" />
+    </context>
+  </template>
+</templateSet>
